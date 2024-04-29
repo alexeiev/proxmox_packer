@@ -1,0 +1,43 @@
+#cloud-config
+autoinstall:
+  version: 1
+  locale: pt_PT
+  keyboard:
+    layout: pt
+  ssh:
+    install-server: true
+    allow-pw: true
+    disable_root: false
+    ssh_quiet_keygen: true
+    allow_public_ssh_keys: true
+  packages:
+    - qemu-guest-agent
+    - sudo
+    - openssh-server
+  storage:
+    layout:
+      name: direct
+    swap:
+      size: 0
+  user-data:
+    package_upgrade: false
+    timezone: Europe/Lisbon
+    ssh_pwauth: true
+    users:
+      - name: ubuntu
+        passwd: $6$DwQJrLP8FX3ECyur$yFjzASLdglbYykcXkCGvU4jHl7xRzTs44wuatGqj5YQL1jJ.dbkiHD4wJJQPYx49181wBaRvI3NOoPYS7./nJ/
+        groups: [adm, sudo]
+        lock-passwd: false
+        sudo: ALL=(ALL) NOPASSWD:ALL
+        shell: /bin/bash
+        # passwd: your-password
+        # - or -
+        ssh_authorized_keys:
+          - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDV+nBHjjcdivQnIYT24PyKEjBmD9tfhK+T0vjesbQRSclTVK+a3ZhuZ1JMt8T27pUKBYKnN5Wv7UXRq+rbLmuSdxzngcXCFNvpgL1lF9eektkFBmSgddIdp3j4qRdiI8TvGIoQ1w6gflEr99h9aFPnpbiTsTZLZ2HGuaYeNcakSIW4mLVWrwEhlksU7vA7fxlsjDt4DnTf/am9sFe3k3UTdFa0dizoPnPaWtfr8y8vwBYJGWhZeGOi617XiXgkq5y8GkYfVjjx4feUk6NtE/x4IfscR1RYmwkpTqEUp7B6yM5j/yg0xE+Cjk7fkJ+TIeulvW/JuuVHm+yoJBTx6zsBfCLAbmm1Im61NjAoA7Dvnr/0SrxqQ54Ms42mf0zezIUvpKnRsA44Bm70wLYRIpNfAaGv6dv2N73QHymfIeQIf+eJt5SgicYx+Ji37X2uve6UpIgofUaJxjFsOy9s+U9N1sZnxG3Y2j5ObsL4E6yZO+hKzy7KDc6ecAF0V4a5W4M= VMsProxMox
+      - name: root
+        passwd: $6$BCZVcidORsc8QDNZ$s4kmUOqv59e920qvZAibqS4hjL86cmeHD.q232YbtbXDAN8QhhQOwIMnWMA1Y3mxUqTbyhHGXaS7CBk4miAkn0
+        lock-passwd: false
+        shell: /bin/bash
+        ssh_authorized_keys:
+          - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDV+nBHjjcdivQnIYT24PyKEjBmD9tfhK+T0vjesbQRSclTVK+a3ZhuZ1JMt8T27pUKBYKnN5Wv7UXRq+rbLmuSdxzngcXCFNvpgL1lF9eektkFBmSgddIdp3j4qRdiI8TvGIoQ1w6gflEr99h9aFPnpbiTsTZLZ2HGuaYeNcakSIW4mLVWrwEhlksU7vA7fxlsjDt4DnTf/am9sFe3k3UTdFa0dizoPnPaWtfr8y8vwBYJGWhZeGOi617XiXgkq5y8GkYfVjjx4feUk6NtE/x4IfscR1RYmwkpTqEUp7B6yM5j/yg0xE+Cjk7fkJ+TIeulvW/JuuVHm+yoJBTx6zsBfCLAbmm1Im61NjAoA7Dvnr/0SrxqQ54Ms42mf0zezIUvpKnRsA44Bm70wLYRIpNfAaGv6dv2N73QHymfIeQIf+eJt5SgicYx+Ji37X2uve6UpIgofUaJxjFsOy9s+U9N1sZnxG3Y2j5ObsL4E6yZO+hKzy7KDc6ecAF0V4a5W4M= VMsProxMox
+          

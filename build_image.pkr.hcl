@@ -1,7 +1,7 @@
 source "proxmox-iso" "ubuntu" {
   proxmox_url               = "https://${var.site}:8006/api2/json"
   username                  = "${var.username}"
-  token                      = "${var.token}"
+  token                     = "${var.token}"
   insecure_skip_tls_verify  = true
   node                      = var.node
   vm_id                     = var.vmid
@@ -14,13 +14,14 @@ source "proxmox-iso" "ubuntu" {
   qemu_agent                = true
 
   scsi_controller           = "virtio-scsi-pci"
+  bios                      = "ovmf"
 
   cores                     = "2"
   sockets                   = "1"
   memory                    = "4096"
 
   cloud_init                = true
-  cloud_init_storage_pool   = "nfs"
+  cloud_init_storage_pool   = var.storage
 
   vga {
     type                    = "virtio"
@@ -30,7 +31,13 @@ source "proxmox-iso" "ubuntu" {
     disk_size               = "30G"
     format                  = "qcow2"
     storage_pool            = var.storage
-    type                    = "virtio"
+    type                    = "scsi"
+  }
+
+  efi_config {
+    efi_type                = "4m"
+    efi_storage_pool        = var.storage
+    pre_enrolled_keys       = true
   }
 
   network_adapters {
